@@ -8,6 +8,7 @@
 
 class BarcodeType {
   const BarcodeType._internal(this.value);
+
   final int value;
 
   /// UPC-A
@@ -37,6 +38,7 @@ class BarcodeType {
 
 class BarcodeText {
   const BarcodeText._internal(this.value);
+
   final int value;
 
   /// Not printed
@@ -54,6 +56,7 @@ class BarcodeText {
 
 class BarcodeFont {
   const BarcodeFont._internal(this.value);
+
   final int value;
 
   static const fontA = BarcodeFont._internal(0);
@@ -77,8 +80,7 @@ class Barcode {
     }
 
     final numeric = RegExp(r'^[0-9]$');
-    final bool isDataValid =
-        barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
+    final bool isDataValid = barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
     if (!isDataValid) {
       throw Exception('Barcode: Data is not valid');
     }
@@ -102,8 +104,7 @@ class Barcode {
     }
 
     final numeric = RegExp(r'^[0-9]$');
-    final bool isDataValid =
-        barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
+    final bool isDataValid = barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
     if (!isDataValid) {
       throw Exception('Barcode: Data is not valid');
     }
@@ -123,8 +124,7 @@ class Barcode {
     }
 
     final numeric = RegExp(r'^[0-9]$');
-    final bool isDataValid =
-        barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
+    final bool isDataValid = barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
     if (!isDataValid) {
       throw Exception('Barcode: Data is not valid');
     }
@@ -144,8 +144,7 @@ class Barcode {
     }
 
     final numeric = RegExp(r'^[0-9]$');
-    final bool isDataValid =
-        barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
+    final bool isDataValid = barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
     if (!isDataValid) {
       throw Exception('Barcode: Data is not valid');
     }
@@ -165,8 +164,7 @@ class Barcode {
     }
 
     final regex = RegExp(r'^[0-9A-Z \$\%\*\+\-\.\/]$');
-    final bool isDataValid =
-        barcodeData.every((dynamic d) => regex.hasMatch(d.toString()));
+    final bool isDataValid = barcodeData.every((dynamic d) => regex.hasMatch(d.toString()));
     if (!isDataValid) {
       throw Exception('Barcode: Data is not valid');
     }
@@ -186,8 +184,7 @@ class Barcode {
     }
 
     final numeric = RegExp(r'^[0-9]$');
-    final bool isDataValid =
-        barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
+    final bool isDataValid = barcodeData.every((dynamic d) => numeric.hasMatch(d.toString()));
     if (!isDataValid) {
       throw Exception('Barcode: Data is not valid');
     }
@@ -209,21 +206,17 @@ class Barcode {
     }
 
     final regex = RegExp(r'^[0-9A-Da-d\$\+\-\.\/\:]$');
-    final bool isDataValid =
-        barcodeData.every((dynamic d) => regex.hasMatch(d.toString()));
+    final bool isDataValid = barcodeData.every((dynamic d) => regex.hasMatch(d.toString()));
     if (!isDataValid) {
       throw Exception('Barcode: Data is not valid');
     }
 
-    if ((_charcode(barcodeData[0]) >= 65 && _charcode(barcodeData[0]) <= 68) &&
-        !(_charcode(barcodeData[k - 1]) >= 65 &&
-            _charcode(barcodeData[k - 1]) <= 68)) {
+    if ((_charcode(barcodeData[0]) >= 65 && _charcode(barcodeData[0]) <= 68) && !(_charcode(barcodeData[k - 1]) >= 65 && _charcode(barcodeData[k - 1]) <= 68)) {
       throw Exception('Barcode: Wrong data range');
     }
 
     if ((_charcode(barcodeData[0]) >= 97 && _charcode(barcodeData[0]) <= 100) &&
-        !(_charcode(barcodeData[k - 1]) >= 97 &&
-            _charcode(barcodeData[k - 1]) <= 100)) {
+        !(_charcode(barcodeData[k - 1]) >= 97 && _charcode(barcodeData[k - 1]) <= 100)) {
       throw Exception('Barcode: Wrong data range');
     }
 
@@ -257,14 +250,14 @@ class Barcode {
     _data = _convertData(barcodeData);
   }
 
-  BarcodeType _type;
-  List<int> _data;
+  BarcodeType? _type;
+  List<int>? _data;
 
-  List<int> _convertData(List<dynamic> list) =>
-      list.map((dynamic d) => d.toString().codeUnitAt(0)).toList();
+  List<int> _convertData(List<dynamic> list) => list.map((dynamic d) => d.toString().codeUnitAt(0)).toList();
 
   int _charcode(dynamic ch) => ch.toString().codeUnitAt(0);
 
-  BarcodeType get type => _type;
-  List<int> get data => _data;
+  BarcodeType get type => _type!;
+
+  List<int> get data => _data!;
 }

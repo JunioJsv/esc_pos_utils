@@ -6,11 +6,13 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:esc_pos_utils/src/commands.dart';
 import 'dart:convert';
+
+import 'package:esc_pos_utils/src/commands.dart';
 
 class QRSize {
   const QRSize(this.value);
+
   final int value;
 
   static const Size1 = QRSize(0x01);
@@ -26,6 +28,7 @@ class QRSize {
 /// QR Correction level
 class QRCorrection {
   const QRCorrection._internal(this.value);
+
   final int value;
 
   /// Level L: Recovery Capacity 7%
@@ -56,8 +59,7 @@ class QRCode {
     // FN 180. QR Code: Store the data in the symbol storage area
     List<int> textBytes = latin1.encode(text);
     // pL pH cn fn m
-    bytes +=
-        cQrHeader.codeUnits + [textBytes.length + 3, 0x00, 0x31, 0x50, 0x30];
+    bytes += cQrHeader.codeUnits + [textBytes.length + 3, 0x00, 0x31, 0x50, 0x30];
     bytes += textBytes;
 
     // FN 182. QR Code: Transmit the size information of the symbol data in the symbol storage area
